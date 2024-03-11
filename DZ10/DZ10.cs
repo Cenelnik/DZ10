@@ -1,7 +1,7 @@
 ﻿namespace DZ10
 {
     /// <summary>
-    /// 10я домашка по OUTUS. Файлы 
+    /// 10я домашка по OUTUS. Файлы DEV-BRANCH
     /// </summary>
     class DZ10
     {
@@ -11,6 +11,8 @@
         /// <param name="args"></param>
         public static async Task Main(string[] args)
         {
+            bool test = false;
+
             CancellationTokenSource cancelTokenSource = new CancellationTokenSource();
             CancellationToken token = cancelTokenSource.Token;
             bool debug = false;
@@ -60,6 +62,7 @@
             string[] dirs = Directory.GetDirectories($"C:\\otus\\");
             foreach (string fldr in dirs)
             {
+        
                 Console.WriteLine(fldr);
                 string[] files = Directory.GetFiles(fldr);
                 Console.WriteLine($"\tLIST OF FILES: ");
