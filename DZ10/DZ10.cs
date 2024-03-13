@@ -11,7 +11,6 @@
         /// <param name="args"></param>
         public static async Task Main(string[] args)
         {
-            bool test = false;
 
             CancellationTokenSource cancelTokenSource = new CancellationTokenSource();
             CancellationToken token = cancelTokenSource.Token;
@@ -28,10 +27,11 @@
 
             Console.WriteLine($"START WORK WITH DIR.. ");
             FolderWorker fw = new FolderWorker(listFolders);
-            var t = Task.Run (() => fw.CreateDirAsync(debug, token), token);
+            var t = fw.CreateDirAsync(debug, token);
+            await t;
             Console.WriteLine($"CreateDirAsync completed work.. => ");
 
-            Task fileTask = null;
+            Task ?fileTask = null;
             
             while (true)
             {
@@ -45,7 +45,8 @@
                             Console.WriteLine($"Create file in folder {folder}");
                             foreach (string name in listFiles)
                             {
-                                fileTask = Task.Run(() => FileCreator.CreateFileAsync(debug, folder, name, token));
+                               fileTask =  FileCreator.CreateFileAsync(debug, folder, name, token);
+                                await fileTask;
                             }
                             
                         }
@@ -73,6 +74,10 @@
             }
 
             Console.ReadLine();
+
+
         }
+
+
     }
 }

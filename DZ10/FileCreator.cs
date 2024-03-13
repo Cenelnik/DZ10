@@ -7,7 +7,7 @@ namespace DZ10
     internal class FileCreator
     {
 
-        internal static async void CreateFileAsync(bool debug, string path, string nameFile, CancellationToken t)
+        internal static async Task CreateFileAsync(bool debug, string path, string nameFile, CancellationToken t)
         { 
             try
             {
