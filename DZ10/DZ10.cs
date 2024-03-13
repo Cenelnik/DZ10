@@ -1,7 +1,7 @@
 ﻿namespace DZ10
 {
     /// <summary>
-    /// 10я домашка по OUTUS. Файлы DEV-BRANCH
+    /// 10я домашка по OUTUS. Master branch
     /// </summary>
     class DZ10
     {
