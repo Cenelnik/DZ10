@@ -13,7 +13,7 @@ namespace DZ10
             _foldersList = folders;
         }
 
-        internal async void CreateDirAsync(bool debug, CancellationToken t)
+        internal async Task CreateDirAsync(bool debug, CancellationToken t)
         {
             try
             {
@@ -29,6 +29,7 @@ namespace DZ10
                                 if (debug) Console.WriteLine($"CreateDirAsync[{Thread.CurrentThread.ManagedThreadId}]: Create Directory {folder}.");
                                 DirectoryInfo df = new DirectoryInfo(folder);
                                 df.Create();
+                                
                             }
                             else
                             {

@@ -1,7 +1,7 @@
 ﻿namespace DZ10
 {
     /// <summary>
-    /// 10я домашка по OUTUS. Файлы 
+    /// 10я домашка по OUTUS. Файлы DEV-BRANCH
     /// </summary>
     class DZ10
     {
@@ -11,6 +11,7 @@
         /// <param name="args"></param>
         public static async Task Main(string[] args)
         {
+
             CancellationTokenSource cancelTokenSource = new CancellationTokenSource();
             CancellationToken token = cancelTokenSource.Token;
             bool debug = false;
@@ -26,10 +27,11 @@
 
             Console.WriteLine($"START WORK WITH DIR.. ");
             FolderWorker fw = new FolderWorker(listFolders);
-            var t = Task.Run (() => fw.CreateDirAsync(debug, token), token);
+            var t = fw.CreateDirAsync(debug, token);
+            await t;
             Console.WriteLine($"CreateDirAsync completed work.. => ");
 
-            Task fileTask = null;
+            Task ?fileTask = null;
             
             while (true)
             {
@@ -43,7 +45,8 @@
                             Console.WriteLine($"Create file in folder {folder}");
                             foreach (string name in listFiles)
                             {
-                                fileTask = Task.Run(() => FileCreator.CreateFileAsync(debug, folder, name, token));
+                               fileTask =  FileCreator.CreateFileAsync(debug, folder, name, token);
+                                await fileTask;
                             }
                             
                         }
@@ -60,6 +63,7 @@
             string[] dirs = Directory.GetDirectories($"C:\\otus\\");
             foreach (string fldr in dirs)
             {
+        
                 Console.WriteLine(fldr);
                 string[] files = Directory.GetFiles(fldr);
                 Console.WriteLine($"\tLIST OF FILES: ");
@@ -70,6 +74,10 @@
             }
 
             Console.ReadLine();
+
+
         }
+
+
     }
 }
